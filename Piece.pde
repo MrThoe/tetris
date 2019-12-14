@@ -1,3 +1,5 @@
+//I ADBANDONED THIS CLASS -- Shape Class is current.....just left this in for anyone who's curious
+
 public class Piece{
   
   private int shape[][];
