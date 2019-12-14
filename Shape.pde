@@ -6,6 +6,7 @@ public class Shape{
   private int choice, r, g, b;
   private int floor; //This will represent the 'floor'
   private boolean isActive;
+  private int theX, theY;
   
   //SHAPES  THERE ARE 7 BASIC TETRIS SHAPES
   private int[][] ln = {{0,0}, {1,0}, {2,0}, {3,0}};
@@ -108,7 +109,6 @@ public class Shape{
             } 
           } return false; 
           
-          //STILL IMPLEMENTING THIS PART --- KENON'S CODE
          case "PIECE BELOW":
            for(int i = 0; i < 4; i++){
             if(get(int(piece[i][0]*w), int(piece[i][1]*w+1.5*w))==-13487566){
@@ -120,6 +120,24 @@ public class Shape{
           return true;
       }
     
+  }
+  
+  public void shift(){
+    for(int i = 0; i < 4; i++){
+        piece[i][1]--;
+    }
+  }
+/// HELP --  NOT QUITE WORKING  
+  public boolean checkBack(Background b){
+
+    for(int i = 0; i < 4; i++){
+      theX = piece[i][0];
+      theY = piece[i][1]; 
+      if(b.colors[theX][theY][0] != 0 || b.colors[theX][theY][1] != 0 || b.colors[theX][theY][2] != 0){
+        shift();
+        return true;
+      }
+    } return false;
   }
   
   public void rotateShape(){
