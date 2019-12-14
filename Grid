@@ -1,0 +1,17 @@
+public class Grid{
+  
+   private float w;
+   
+   public Grid(){
+       w = width/12;
+   }
+   
+   public void display(){
+
+     for(int i = 0; i < 13; i++){
+       line(i*w, 0, i*w, height); //vertical lines
+       line(0, i*w, width, i*w); //horizontal lines (top half);
+       line(0, (13+i)*w, width, (13+i)*w);
+     }
+   }
+}
