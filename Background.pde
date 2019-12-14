@@ -1,9 +1,10 @@
 public class Background{
   
-  private int[][][] colors;
+  private int[][][] colors, newColors;
   private int r, g, b;
   private float w;
   private int x,y;  //index the piece x,y;
+  private boolean isFull;
   
   //USE THE CONSTRUCTOR TO SET BACKGROUND COLOR (r,g,b)
   public Background(){
@@ -28,16 +29,42 @@ public class Background{
           fill(r,g,b);
           rect(i*w, j*w, w, w);
         }
-      }    
+      } 
+      for(int i = 0; i < 24; i++){  
+        if(checkLine(i)){
+          println("Full line~!");
+          removeLine(i);
+        }
+      }
+  }
+  
+  public boolean checkLine(int row){
+        for(int j = 0; j < 12; j++){
+          if(colors[j][row][0] == 0 && colors[j][row][1] == 0 && colors [j][row][2] == 0){
+            return false;
+          }   
+        }
+      
+      return true;  
+  }
+  
+  public void removeLine(int row){
+      for(int i = 0; i < 12 ; i++){
+        colors[i][row][0]=0;
+        colors[i][row][1]=0;
+        colors[i][row][2]=0;
+      }
   }
   
   public void writeShape(Shape s){
     for(int i = 0; i < 4; i++){
         x = s.piece[i][0];  //Get the piece x and y
         y = s.piece[i][1];
-        colors[x][y][0] = s.r;
-        colors[x][y][1] = s.g;
-        colors[x][y][2] = s.b;
+        if(y >= 0 && x >= 0 && x < 12 && y < 24){
+          colors[x][y][0] = s.r;
+          colors[x][y][1] = s.g;
+          colors[x][y][2] = s.b;
+        }
     }
   }
   
