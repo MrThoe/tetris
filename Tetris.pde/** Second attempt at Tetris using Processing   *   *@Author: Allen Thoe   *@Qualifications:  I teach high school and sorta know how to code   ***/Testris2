@@ -28,11 +28,14 @@ void draw(){
 
 void drawShapes(){
   shape.display();
+  if(shape.checkBack(bg)){
+    shape.isActive = false;
+  }
   if(!shape.isActive){
      bg.writeShape(shape);
      shape = onDeck;
      onDeck = new Shape();
-
+      
   }
 }
 public void keyPressed(){
