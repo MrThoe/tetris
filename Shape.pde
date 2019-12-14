@@ -132,10 +132,12 @@ public class Shape{
 
     for(int i = 0; i < 4; i++){
       theX = piece[i][0];
-      theY = piece[i][1]; 
-      if(b.colors[theX][theY][0] != 0 || b.colors[theX][theY][1] != 0 || b.colors[theX][theY][2] != 0){
-        shift();
-        return true;
+      theY = piece[i][1];
+      if(theX > 0 && theY >0 && theX < 12 &&  theY < 24){
+        if(b.colors[theX][theY][0] != 0 || b.colors[theX][theY][1] != 0 || b.colors[theX][theY][2] != 0){
+          shift();
+          return true;
+        }
       }
     } return false;
   }
@@ -165,5 +167,31 @@ public class Shape{
         } 
       }
     piece = rotated;
+    //checkPiece();
   } 
+  
+  
+  //ALL OF THE CODE BELOW HERE IS TO DEBUG NULL-POINTER EXCEPTIONS
+  public void checkPiece(){
+      for(int i = 0; i < 4; i++){
+        if(piece[i][0] < 0){
+          movePiece("RIGHT");
+        }
+        if(piece[i][0] > 11){
+          movePiece("LEFT");
+        }
+      }  
+  }
+  
+  public void movePiece(String dir){
+    if(dir == "RIGHT"){
+      for(int i = 0; i < 4; i++){
+        piece[i][0]++;
+      }
+    } else if (dir == "LEFT"){
+      for(int i = 0; i < 4; i++){
+        piece[i][0]--;
+      }   
+    }
+  }
 }
