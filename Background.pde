@@ -5,11 +5,12 @@ public class Background{
   private float w;
   private int x,y;  //index the piece x,y;
   private boolean isFull;
+  private int score;
   
   //USE THE CONSTRUCTOR TO SET BACKGROUND COLOR (r,g,b)
   public Background(){
       colors = new int[12][24][3]; 
-      w = width/12;
+      w = width/24;
       for(int i = 0; i < 12; i++){
         for(int j = 0; j < 24; j++){
           colors[i][j][0] = 0;
@@ -21,6 +22,8 @@ public class Background{
   
   //At the beginning of each 
   public void display(){
+    showRightSide();
+
       for(int i = 0; i < 12; i++){
         for(int j = 0; j < 24; j++){
           r = colors[i][j][0];
@@ -36,6 +39,17 @@ public class Background{
           removeLine(i);
         }
       }
+  }
+  
+  public void showRightSide(){
+    fill(105,105,0);
+    rect(width/2, 0, width/2, height, 10);
+    fill(0,0,155);
+    rect(width/2 + 10, 10, width/2-20, height-20, 4); 
+    fill(255,0,0);
+    text("Welcome to Tetris" , width - 335, 55); 
+    text("Next: ", width - 335, 195);
+    text("Score: " + score, width - 335, height - 50);
   }
   
   public boolean checkLine(int row){
@@ -58,6 +72,7 @@ public class Background{
   }
   
   public void dropLinesAbove(int row){
+    score++;
      for(int r = row; r >= 1; r--){
        for(int j = 0; j < 12; j++){
          colors[j][r][0] = colors[j][r-1][0];
