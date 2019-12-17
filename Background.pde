@@ -54,18 +54,32 @@ public class Background{
         colors[i][row][1]=0;
         colors[i][row][2]=0;
       }
+      dropLinesAbove(row);
   }
   
+  public void dropLinesAbove(int row){
+     for(int r = row; r >= 1; r--){
+       for(int j = 0; j < 12; j++){
+         colors[j][r][0] = colors[j][r-1][0];
+         colors[j][r][1] = colors[j][r-1][1];
+         colors[j][r][2] = colors[j][r-1][2];
+       }
+     }
+  }
+  
+  
   public void writeShape(Shape s){
-    for(int i = 0; i < 4; i++){
-        x = s.piece[i][0];  //Get the piece x and y
-        y = s.piece[i][1];
-        if(y >= 0 && x >= 0 && x < 12 && y < 24){
-          colors[x][y][0] = s.r;
-          colors[x][y][1] = s.g;
-          colors[x][y][2] = s.b;
-        }
-    }
+   
+      for(int i = 0; i < 4; i++){
+          x = s.piece[i][0];  //Get the piece x and y
+          y = s.piece[i][1];
+          if(y >= 0 && x >= 0 && x < 12 && y < 24){
+            colors[x][y][0] = s.r;
+            colors[x][y][1] = s.g;
+            colors[x][y][2] = s.b;
+          }
+      }
+    
   }
   
 }
