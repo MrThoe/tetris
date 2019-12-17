@@ -18,9 +18,9 @@ public class Shape{
   private int[][] otherS = {{0,1}, {1,1}, {1,0}, {2, 0}};
   
   public Shape(){
-      isActive = true;
+      isActive = false;
       floor = 22;
-      w = width/12;
+      w = width/24;
       count = 1;
       choice = (int)random(7);
       switch(choice){
@@ -68,18 +68,31 @@ public class Shape{
   
   public void display(){
      fill(r,g,b);
-     for(int i = 0; i < 4; i++){
-       if(piece[i][1] > floor){
-         isActive = false;
+     if(isActive){
+       for(int i = 0; i < 4; i++){
+         if(piece[i][1] > floor){
+           isActive = false;
+         }
        }
-     }
-     for(int i = 0; i < 4; i++){
-         rect(piece[i][0]*w, piece[i][1]*w, w, w); 
-         if(count%50==0 && isActive){
-           piece[i][1]++;
-         } 
+       for(int i = 0; i < 4; i++){
+           rect(piece[i][0]*w, piece[i][1]*w, w, w);
+           if(count%50==0&&isActive){
+             piece[i][1]++;
+           } 
+       }  
+     } else {
+      for(int i = 0; i < 4; i++){
+         rect(piece[i][0]*w + width/2 + 100, piece[i][1]*w + height/2 - 100, w, w); 
+       }        
      }
      count++;
+  }
+  
+  public void showOnFloor(){
+    fill(r,g,b);
+     for(int i = 0; i < 4; i++){
+       rect(piece[i][0]*w, piece[i][1]*w, w, w);
+     }     
   }
   
   public boolean checkSide(String side){
@@ -104,7 +117,7 @@ public class Shape{
           } return true; 
         case "FLOOR":
            for(int i = 0; i < 4; i++){
-            if(piece[i][1] > floor){
+            if(piece[i][1] >= floor){
               return true;
             } 
           } return false; 
