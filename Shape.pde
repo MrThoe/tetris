@@ -5,7 +5,7 @@ public class Shape{
   private float w;
   private int choice, r, g, b;
   private int floor; //This will represent the 'floor'
-  private boolean isActive;
+  private boolean isActive, isOnFloor;
   private int theX, theY;
   
   //SHAPES  THERE ARE 7 BASIC TETRIS SHAPES
@@ -122,12 +122,12 @@ public class Shape{
     
   }
   
-  public void shift(){
+  public void shiftDown(){
     for(int i = 0; i < 4; i++){
         piece[i][1]--;
     }
   }
-/// HELP --  NOT QUITE WORKING  
+ 
   public boolean checkBack(Background b){
 
     for(int i = 0; i < 4; i++){
@@ -135,8 +135,13 @@ public class Shape{
       theY = piece[i][1];
       if(theX > 0 && theY >0 && theX < 12 &&  theY < 24){
         if(b.colors[theX][theY][0] != 0 || b.colors[theX][theY][1] != 0 || b.colors[theX][theY][2] != 0){
-          shift();
-          return true;
+          shiftDown();
+          if(isOnFloor){   //FIXED SO THE BLOCK HAS ONE CYCLE BEFORE BEING WRITTEN
+            return true;
+          } else {
+            isOnFloor = true;
+            return false;
+          }
         }
       }
     } return false;
@@ -171,7 +176,7 @@ public class Shape{
   } 
   
   
-  //ALL OF THE CODE BELOW HERE IS TO DEBUG NULL-POINTER EXCEPTIONS
+  //ALL OF THE CODE BELOW HERE IS TO DEBUG NULL-POINTER EXCEPTIONS & DOESNT WORK
   public void checkPiece(){
       for(int i = 0; i < 4; i++){
         if(piece[i][0] < 0){
