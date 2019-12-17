@@ -146,7 +146,7 @@ public class Shape{
     for(int i = 0; i < 4; i++){
       theX = piece[i][0];
       theY = piece[i][1];
-      if(theX > 0 && theY >0 && theX < 12 &&  theY < 24){
+      if(theX >= 0 && theY > 0 && theX < 12 &&  theY < 24){
         if(b.colors[theX][theY][0] != 0 || b.colors[theX][theY][1] != 0 || b.colors[theX][theY][2] != 0){
           shiftDown();
           if(isOnFloor){   //FIXED SO THE BLOCK HAS ONE CYCLE BEFORE BEING WRITTEN
